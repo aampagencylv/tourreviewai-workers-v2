@@ -121,20 +121,25 @@ export class JobProcessor {
     // Check for incremental sync - find the most recent review for this business
     let lastReviewDate: string | null = null;
     if (!payload.full_history) {
-      const { data: lastReview } = await this.supabase
-        .from('tripadvisor_reviews')
-        .select('review_date')
-        .eq('platform', 'tripadvisor')
-        .ilike('source_url', `%${businessId}%`)
-        .order('review_date', { ascending: false })
-        .limit(1)
-        .single();
-        
-      if (lastReview?.review_date) {
-        lastReviewDate = lastReview.review_date;
-        this.logger.info(`🔄 Incremental sync: Last review date found: ${lastReviewDate}`);
-      } else {
-        this.logger.info(`🆕 First-time import: No existing reviews found for this business`);
+      try {
+        const { data: lastReview, error } = await this.supabase
+          .from('tripadvisor_reviews')
+          .select('review_date')
+          .eq('platform', 'tripadvisor')
+          .ilike('source_url', `%${businessId}%`)
+          .order('review_date', { ascending: false })
+          .limit(1)
+          .maybeSingle(); // Use maybeSingle() instead of single() to handle no results
+          
+        if (!error && lastReview?.review_date) {
+          lastReviewDate = lastReview.review_date;
+          this.logger.info(`🔄 Incremental sync: Last review date found: ${lastReviewDate}`);
+        } else {
+          this.logger.info(`🆕 First-time import: No existing reviews found for this business`);
+        }
+      } catch (error) {
+        this.logger.warn(`⚠️ Could not check for existing reviews:`, error);
+        // Continue with full import if incremental check fails
       }
     }
     
@@ -221,7 +226,7 @@ export class JobProcessor {
         if (result.tasks && result.tasks.length > 0) {
           const task = result.tasks[0];
           
-          if (task.status_code === 20000 && task.result && task.result.length > 0) {
+          if (task.status_code === 20000 && task.result && Array.isArray(task.result) && task.result.length > 0) {
             this.logger.info(`✅ DataForSEO results ready for task: ${taskId}`);
             return task.result[0];
           }
@@ -233,6 +238,12 @@ export class JobProcessor {
           
           if (task.status_code !== 20000) {
             throw new Error(`DataForSEO task failed: ${task.status_code} - ${task.status_message}`);
+          }
+          
+          // Handle case where task is successful but no results
+          if (task.status_code === 20000 && (!task.result || !Array.isArray(task.result) || task.result.length === 0)) {
+            this.logger.warn(`⚠️ DataForSEO task completed but returned no results for task: ${taskId}`);
+            return { items: [], reviews_count: 0 }; // Return empty result structure
           }
         }
       } catch (error) {
