@@ -343,11 +343,14 @@ export class JobProcessor {
       const reviewRecords = batch.map(review => ({
         source: 'tripadvisor',
         external_id: review.review_id || `tripadvisor_${Date.now()}_${Math.random()}`,
-        reviewer_name: review.user_profile?.name || 'Anonymous',
+        author_name: review.user_profile?.name || 'Anonymous',
         rating: review.rating?.value || 5,
-        review_text: review.review_text || '',
-        review_date: review.timestamp || review.date_of_visit || new Date().toISOString(),
-        helpful_votes: (review as any).helpful_votes || 0,
+        text: review.review_text || '',
+        posted_at: review.timestamp || review.date_of_visit || new Date().toISOString(),
+        author_photo_url: (review.user_profile as any)?.photo_url || null,
+        place_name: 'Vegas Jeep Tours',
+        review_url: review.review_url || null,
+        tour_operator_id: '55e41290-65af-4e0e-8d4f-6c058f5e0a0f', // Use the actual user ID
         raw_data: review
       }));
       
