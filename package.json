@@ -1,6 +1,6 @@
 {
   "name": "tourreviewai-workers",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "Scalable review processing workers for TourReviewAI",
   "main": "dist/index.js",
   "scripts": {
