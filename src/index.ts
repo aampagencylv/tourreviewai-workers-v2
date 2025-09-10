@@ -37,13 +37,15 @@ async function main() {
     app.get('/', (req, res) => {
       res.json({
         service: 'TourReviewAI Enhanced Worker',
-        version: '2.0.0',
+        version: '2.1.0',
         status: 'healthy',
+        timestamp: new Date().toISOString(),
         features: [
           'TripAdvisor URL validation and locking',
           'Enhanced sync capabilities',
           'Comprehensive status monitoring',
-          'Backward compatibility'
+          'Legacy API compatibility',
+          'DataForSEO integration'
         ],
         endpoints: {
           legacy: [
@@ -58,6 +60,11 @@ async function main() {
             'GET /api/tripadvisor/lock-status/:userId',
             'POST /api/tripadvisor/trigger-sync',
             'GET /api/sync/status/:userId'
+          ],
+          health: [
+            'GET /health',
+            'GET /api/health',
+            'GET /api/status'
           ]
         }
       });
@@ -113,57 +120,53 @@ async function main() {
             legacyAPI: true,
             enhancedAPI: true,
             urlValidation: true,
-            urlLocking: true,
-            comprehensiveStatus: true
+            syncManagement: true,
+            dataForSEO: true
           }
         });
       } catch (error) {
         res.status(500).json({
           service: 'TourReviewAI Enhanced Worker',
           status: 'error',
-          error: error instanceof Error ? error.message : 'Unknown error'
+          error: error instanceof Error ? error.message : 'Unknown error',
+          timestamp: new Date().toISOString()
         });
       }
     });
 
-    // ===== ERROR HANDLING =====
-    
-    // 404 handler
+    // Catch-all for undefined routes
     app.use('*', (req, res) => {
       res.status(404).json({
         error: 'Endpoint not found',
-        availableEndpoints: {
-          legacy: [
-            'POST /api/jobs/tripadvisor',
-            'GET /api/jobs/:id/status',
-            'GET /api/jobs',
-            'GET /api/jobs/:id/reviews'
-          ],
-          enhanced: [
-            'POST /api/tripadvisor/validate-url',
-            'POST /api/tripadvisor/setup-url',
-            'GET /api/tripadvisor/lock-status/:userId',
-            'POST /api/tripadvisor/trigger-sync',
-            'GET /api/sync/status/:userId'
-          ],
-          health: [
-            'GET /health',
-            'GET /api/health',
-            'GET /api/status'
-          ]
-        }
+        service: 'TourReviewAI Enhanced Worker',
+        availableEndpoints: [
+          'GET /',
+          'POST /api/jobs/tripadvisor',
+          'GET /api/jobs/:id/status',
+          'GET /api/jobs',
+          'GET /api/jobs/:id/reviews',
+          'POST /api/tripadvisor/validate-url',
+          'POST /api/tripadvisor/setup-url',
+          'GET /api/tripadvisor/lock-status/:userId',
+          'POST /api/tripadvisor/trigger-sync',
+          'GET /api/sync/status/:userId',
+          'GET /health',
+          'GET /api/health',
+          'GET /api/status'
+        ]
       });
     });
 
-    // Global error handler
+    // Error handling middleware
     app.use((error: any, req: any, res: any, next: any) => {
-      logger.error('Unhandled API error:', error);
+      logger.error('🚨 Express error:', error);
       res.status(500).json({
         error: 'Internal server error',
-        details: error.message
+        service: 'TourReviewAI Enhanced Worker'
       });
     });
 
+    // Start the server
     const apiPort = parseInt(process.env.PORT || process.env.API_PORT || '8080');
     
     app.listen(apiPort, '0.0.0.0', () => {
@@ -219,4 +222,3 @@ process.on('uncaughtException', (error) => {
 
 main();
 
-// Force deployment Wed Sep 10 15:38:21 EDT 2025
