@@ -155,7 +155,7 @@ export class JobProcessor {
     
     const taskId = await this.retryManager.executeWithRetry(
       async () => {
-        const result = await this.dataForSEOClient.createTask('tripadvisor_reviews', payload);
+        const result = await this.dataForSEOClient.createTask('business_data/tripadvisor/reviews', payload);
         return result.tasks[0].id;
       },
       {
@@ -183,7 +183,7 @@ export class JobProcessor {
       await this.updateProgress(syncJobId, 30 + (attempt * progressIncrement), 'waiting_for_results');
       
       try {
-        const result = await this.dataForSEOClient.getTaskResult('tripadvisor_reviews', taskId);
+        const result = await this.dataForSEOClient.getTaskResult('business_data/tripadvisor/reviews', taskId);
         
         if (result.tasks && result.tasks.length > 0) {
           const task = result.tasks[0];
