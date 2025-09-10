@@ -339,29 +339,23 @@ export class JobProcessor {
     for (let i = 0; i < reviewsToImport.length; i += batchSize) {
       const batch = reviewsToImport.slice(i, i + batchSize);
       
-      // Complete review records for the new clean table
+      // Complete review records for the external_reviews table
       const reviewRecords = batch.map(review => ({
-        job_id: syncJobId,
-        platform: 'tripadvisor',
+        source: 'tripadvisor',
         external_id: review.review_id || `tripadvisor_${Date.now()}_${Math.random()}`,
-        author_name: review.user_profile?.name || 'Anonymous',
-        author_location: (review.user_profile as any)?.location || null,
+        reviewer_name: review.user_profile?.name || 'Anonymous',
         rating: review.rating?.value || 5,
-        review_title: review.title || null,
-        review_text: review.review_text || 'No review text available',
-        review_date: review.timestamp || new Date().toISOString(),
-        source_url: review.url || null,
-        language: review.language || 'en',
-        is_verified: review.is_verified || false,
-        helpful_votes: review.helpful_votes || 0,
+        review_text: review.review_text || '',
+        review_date: review.timestamp || review.date_of_visit || new Date().toISOString(),
+        helpful_votes: (review as any).helpful_votes || 0,
         raw_data: review
       }));
       
       try {
         const { error, count } = await this.supabase
-          .from('tripadvisor_reviews')
+          .from('external_reviews')
           .upsert(reviewRecords, { 
-            onConflict: 'platform,external_id',
+            onConflict: 'source,external_id',
             count: 'exact'
           });
         
