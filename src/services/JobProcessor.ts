@@ -160,7 +160,7 @@ export class JobProcessor {
       url_path: urlPath,
       location_code: 1003854, // United States location code
       priority: 2,
-      depth: fullHistory ? 100 : 20
+      depth: fullHistory ? 500 : 150  // Increased limits: 150 default, 500 for full history
     }];
     
     this.logger.info('📡 Creating DataForSEO task:', payload);
