@@ -64,16 +64,40 @@ export class JobProcessor {
       // Update progress
       await this.updateProgress(syncJobId, 10, 'extracting_url');
       
-      // Call DataForSEO API with appropriate depth
-      const depth = payload.full_history ? 200 : 20; // Use 200 to get all Vegas Jeep Tours reviews
-      const taskId = await this.createDataForSEOTask(urlPath, payload.full_history, depth);
+      // Smart two-phase approach for full history imports
+      let taskId: string;
+      let reviewsData: any;
       
-      // Update sync job with task ID
-      await this.updateSyncJob(syncJobId, { dataforseo_task_id: taskId });
-      await this.updateProgress(syncJobId, 30, 'waiting_for_results');
-      
-      // Poll for results
-      const reviewsData = await this.pollForResults(syncJobId, taskId);
+      if (payload.full_history) {
+        // Phase 1: Get review count with minimal API cost
+        this.logger.info(`📊 Phase 1: Getting review count for smart depth calculation`);
+        const countTaskId = await this.createDataForSEOTask(urlPath, false, 10); // Small depth to get count
+        await this.updateProgress(syncJobId, 20, 'getting_review_count');
+        
+        const countData = await this.pollForResults(syncJobId, countTaskId);
+        const totalReviews = countData.reviews_count || 0;
+        
+        this.logger.info(`📊 Found ${totalReviews} total reviews available`);
+        await this.updateSyncJob(syncJobId, { total_available: totalReviews });
+        
+        if (totalReviews > 10) {
+          // Phase 2: Get all reviews with exact depth needed
+          this.logger.info(`📊 Phase 2: Getting all ${totalReviews} reviews with optimal depth`);
+          taskId = await this.createDataForSEOTask(urlPath, true, totalReviews);
+          await this.updateProgress(syncJobId, 40, 'getting_all_reviews');
+          reviewsData = await this.pollForResults(syncJobId, taskId);
+        } else {
+          // Use the count data if there are only a few reviews
+          this.logger.info(`📊 Using Phase 1 data (only ${totalReviews} reviews)`);
+          reviewsData = countData;
+        }
+      } else {
+        // For incremental sync, use standard approach
+        const depth = 20; // Small depth for checking new reviews
+        taskId = await this.createDataForSEOTask(urlPath, false, depth);
+        await this.updateProgress(syncJobId, 30, 'checking_new_reviews');
+        reviewsData = await this.pollForResults(syncJobId, taskId);
+      }
       
       // Process and import reviews with incremental sync
       await this.updateProgress(syncJobId, 60, 'importing_reviews');
