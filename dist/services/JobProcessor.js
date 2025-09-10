@@ -34,34 +34,14 @@ class JobProcessor {
             const urlPath = this.extractTripAdvisorPath(payload.url);
             // Update progress
             await this.updateProgress(syncJobId, 10, 'extracting_url');
-            // Call DataForSEO API with smart depth calculation
-            let taskId;
-            let reviewsData;
-            if (payload.full_history) {
-                // Phase 1: Get review count with small depth
-                this.logger.info(`📊 Phase 1: Getting review count for smart depth calculation`);
-                const countTaskId = await this.createDataForSEOTask(urlPath, false, 10); // Small depth to get count
-                await this.updateProgress(syncJobId, 20, 'getting_review_count');
-                const countData = await this.pollForResults(syncJobId, countTaskId);
-                const totalReviews = countData.reviews_count || 0;
-                this.logger.info(`📊 Found ${totalReviews} total reviews available`);
-                if (totalReviews > 10) {
-                    // Phase 2: Get all reviews with exact depth
-                    this.logger.info(`📊 Phase 2: Getting all ${totalReviews} reviews`);
-                    taskId = await this.createDataForSEOTask(urlPath, true, totalReviews);
-                    await this.updateProgress(syncJobId, 30, 'getting_all_reviews');
-                    reviewsData = await this.pollForResults(syncJobId, taskId);
-                }
-                else {
-                    // Use the count data if there are only a few reviews
-                    reviewsData = countData;
-                }
-            }
-            else {
-                // For incremental sync, use standard approach
-                taskId = await this.createDataForSEOTask(urlPath, false);
-                reviewsData = await this.pollForResults(syncJobId, taskId);
-            }
+            // Call DataForSEO API with appropriate depth
+            const depth = payload.full_history ? 200 : 20; // Use 200 to get all Vegas Jeep Tours reviews
+            const taskId = await this.createDataForSEOTask(urlPath, payload.full_history, depth);
+            // Update sync job with task ID
+            await this.updateSyncJob(syncJobId, { dataforseo_task_id: taskId });
+            await this.updateProgress(syncJobId, 30, 'waiting_for_results');
+            // Poll for results
+            const reviewsData = await this.pollForResults(syncJobId, taskId);
             // Process and import reviews with incremental sync
             await this.updateProgress(syncJobId, 60, 'importing_reviews');
             const importedCount = await this.importReviews(syncJobId, reviewsData, lastReviewDate);
@@ -300,14 +280,14 @@ class JobProcessor {
                 errors += batch.length;
             }
             // Update progress
-            const progress = 60 + Math.round(((i + batch.length) / allReviews.length) * 35);
+            const progress = 60 + Math.round(((i + batch.length) / reviewsToImport.length) * 35);
             await this.updateProgress(syncJobId, progress, 'importing_reviews');
             await this.updateSyncJob(syncJobId, {
                 imported_count: imported,
                 skipped_count: skipped,
                 error_count: errors
             });
-            this.logger.debug(`📊 Progress: ${imported}/${allReviews.length} imported, ${skipped} skipped, ${errors} errors`);
+            this.logger.debug(`📊 Progress: ${imported}/${reviewsToImport.length} imported, ${skipped} skipped, ${errors} errors`);
         }
         this.logger.info(`📊 Import completed: ${imported} imported, ${skipped} skipped, ${errors} errors`);
         return imported;
