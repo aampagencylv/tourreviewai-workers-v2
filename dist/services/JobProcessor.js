@@ -34,13 +34,34 @@ class JobProcessor {
             const urlPath = this.extractTripAdvisorPath(payload.url);
             // Update progress
             await this.updateProgress(syncJobId, 10, 'extracting_url');
-            // Call DataForSEO API
-            const taskId = await this.createDataForSEOTask(urlPath, payload.full_history);
-            // Update sync job with task ID
-            await this.updateSyncJob(syncJobId, { dataforseo_task_id: taskId });
-            await this.updateProgress(syncJobId, 30, 'waiting_for_results');
-            // Poll for results
-            const reviewsData = await this.pollForResults(syncJobId, taskId);
+            // Call DataForSEO API with smart depth calculation
+            let taskId;
+            let reviewsData;
+            if (payload.full_history) {
+                // Phase 1: Get review count with small depth
+                this.logger.info(`📊 Phase 1: Getting review count for smart depth calculation`);
+                const countTaskId = await this.createDataForSEOTask(urlPath, false, 10); // Small depth to get count
+                await this.updateProgress(syncJobId, 20, 'getting_review_count');
+                const countData = await this.pollForResults(syncJobId, countTaskId);
+                const totalReviews = countData.reviews_count || 0;
+                this.logger.info(`📊 Found ${totalReviews} total reviews available`);
+                if (totalReviews > 10) {
+                    // Phase 2: Get all reviews with exact depth
+                    this.logger.info(`📊 Phase 2: Getting all ${totalReviews} reviews`);
+                    taskId = await this.createDataForSEOTask(urlPath, true, totalReviews);
+                    await this.updateProgress(syncJobId, 30, 'getting_all_reviews');
+                    reviewsData = await this.pollForResults(syncJobId, taskId);
+                }
+                else {
+                    // Use the count data if there are only a few reviews
+                    reviewsData = countData;
+                }
+            }
+            else {
+                // For incremental sync, use standard approach
+                taskId = await this.createDataForSEOTask(urlPath, false);
+                reviewsData = await this.pollForResults(syncJobId, taskId);
+            }
             // Process and import reviews with incremental sync
             await this.updateProgress(syncJobId, 60, 'importing_reviews');
             const importedCount = await this.importReviews(syncJobId, reviewsData, lastReviewDate);
@@ -134,15 +155,29 @@ class JobProcessor {
         }
         return match[1];
     }
-    async createDataForSEOTask(urlPath, fullHistory, offset = 0) {
+    async createDataForSEOTask(urlPath, fullHistory, explicitDepth) {
+        let depth;
+        if (explicitDepth) {
+            // Use the explicit depth provided (either for count check or exact review count)
+            depth = Math.min(explicitDepth, 4490); // Respect DataForSEO max limit
+        }
+        else if (fullHistory) {
+            // Default for full history when we don't know the count yet
+            depth = 1000;
+        }
+        else {
+            // Default for incremental sync
+            depth = 20;
+        }
+        // Round up to nearest 10 as recommended by DataForSEO
+        depth = Math.ceil(depth / 10) * 10;
         const payload = [{
                 url_path: urlPath,
                 location_code: 1003854, // United States location code
                 priority: 2,
-                depth: fullHistory ? 1000 : 500, // Higher limits to support businesses with many reviews
-                offset: offset // Add offset for pagination
+                depth: depth
             }];
-        this.logger.info('📡 Creating DataForSEO task:', payload);
+        this.logger.info(`📡 Creating DataForSEO task with depth ${depth} (explicit: ${explicitDepth}, fullHistory: ${fullHistory})`);
         const taskId = await this.retryManager.executeWithRetry(async () => {
             const result = await this.dataForSEOClient.createTask('business_data/tripadvisor/reviews', payload);
             return result.tasks[0].id;
@@ -197,61 +232,35 @@ class JobProcessor {
     }
     async importReviews(syncJobId, reviewsData, lastReviewDate) {
         const totalAvailable = reviewsData.reviews_count || 0;
-        const firstBatch = reviewsData.items || [];
-        this.logger.info(`📊 Total reviews available: ${totalAvailable}, First batch: ${firstBatch.length}`);
+        const allReviews = reviewsData.items || [];
+        this.logger.info(`📊 Total reviews available: ${totalAvailable}, Retrieved: ${allReviews.length}`);
         if (lastReviewDate) {
             this.logger.info(`🔄 Incremental sync: Only importing reviews newer than ${lastReviewDate}`);
         }
         // Update total available count from API response
         await this.updateSyncJob(syncJobId, { total_available: totalAvailable });
-        // Filter first batch for incremental sync
-        let filteredFirstBatch = firstBatch;
+        // Filter for incremental sync if needed
+        let reviewsToImport = allReviews;
         if (lastReviewDate) {
-            filteredFirstBatch = firstBatch.filter(review => {
+            reviewsToImport = allReviews.filter(review => {
                 const reviewDate = review.timestamp || review.date_of_visit;
                 return reviewDate && new Date(reviewDate) > new Date(lastReviewDate);
             });
-            this.logger.info(`📋 Filtered first batch: ${filteredFirstBatch.length}/${firstBatch.length} are new reviews`);
-        }
-        // Collect all reviews through pagination
-        let allReviews = [...filteredFirstBatch];
-        let currentOffset = firstBatch.length;
-        // For incremental sync, if first batch has no new reviews, we might be done
-        if (lastReviewDate && filteredFirstBatch.length === 0 && firstBatch.length > 0) {
-            this.logger.info(`✅ Incremental sync complete: No new reviews found in first batch`);
-            return 0;
-        }
-        // Continue fetching if there are more reviews available
-        while (currentOffset < totalAvailable) { // No artificial cap - collect ALL available reviews
-            this.logger.info(`📄 Fetching more reviews: ${currentOffset}/${totalAvailable}`);
-            try {
-                // Create additional DataForSEO task for next batch
-                const urlPath = this.extractTripAdvisorPath(reviewsData.check_url || '');
-                const nextTaskId = await this.createDataForSEOTask(urlPath, true, currentOffset);
-                const nextBatch = await this.pollForResults(syncJobId, nextTaskId);
-                if (nextBatch && nextBatch.items && nextBatch.items.length > 0) {
-                    allReviews.push(...nextBatch.items);
-                    currentOffset += nextBatch.items.length;
-                    this.logger.info(`✅ Collected ${nextBatch.items.length} more reviews (Total: ${allReviews.length})`);
-                }
-                else {
-                    this.logger.info(`🔚 No more reviews available at offset ${currentOffset}`);
-                    break;
-                }
-            }
-            catch (error) {
-                this.logger.error(`❌ Error fetching reviews at offset ${currentOffset}:`, error);
-                break; // Continue with what we have
+            this.logger.info(`📋 Filtered reviews: ${reviewsToImport.length}/${allReviews.length} are new reviews`);
+            // If no new reviews found, we're done
+            if (reviewsToImport.length === 0) {
+                this.logger.info(`✅ Incremental sync complete: No new reviews found`);
+                return 0;
             }
         }
-        this.logger.info(`📝 Importing ${allReviews.length} total reviews for sync job: ${syncJobId}`);
+        this.logger.info(`📝 Importing ${reviewsToImport.length} reviews for sync job: ${syncJobId}`);
         let imported = 0;
         let skipped = 0;
         let errors = 0;
         // Process in batches for better performance and memory management
         const batchSize = this.config.batchSize;
-        for (let i = 0; i < allReviews.length; i += batchSize) {
-            const batch = allReviews.slice(i, i + batchSize);
+        for (let i = 0; i < reviewsToImport.length; i += batchSize) {
+            const batch = reviewsToImport.slice(i, i + batchSize);
             // Complete review records for the new clean table
             const reviewRecords = batch.map(review => ({
                 job_id: syncJobId,
