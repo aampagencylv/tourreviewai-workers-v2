@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JobProcessor = void 0;
-const crypto_1 = require("crypto");
 const Config_1 = require("../config/Config");
 const Logger_1 = require("../utils/Logger");
 const DataForSEOClient_1 = require("../clients/DataForSEOClient");
 const RetryManager_1 = require("../utils/RetryManager");
+// Use require for crypto to ensure compatibility
+const crypto = require('crypto');
 class JobProcessor {
     constructor(supabase) {
         this.supabase = supabase;
@@ -60,7 +61,7 @@ class JobProcessor {
         }
     }
     async createReviewSyncJob(queueJobId, payload) {
-        const syncJobId = (0, crypto_1.randomUUID)();
+        const syncJobId = crypto.randomUUID();
         // Extract business info from URL
         const businessMatch = payload.url.match(/\/([^\/]+)\.html$/);
         const businessId = businessMatch ? businessMatch[1] : 'unknown';

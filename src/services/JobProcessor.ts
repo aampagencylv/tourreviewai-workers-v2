@@ -1,10 +1,12 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import axios from 'axios';
-import { randomUUID } from 'crypto';
 import { Config } from '../config/Config';
 import { Logger } from '../utils/Logger';
 import { DataForSEOClient } from '../clients/DataForSEOClient';
 import { RetryManager } from '../utils/RetryManager';
+
+// Use require for crypto to ensure compatibility
+const crypto = require('crypto');
 
 interface TripAdvisorImportPayload {
   user_id: string;
@@ -98,7 +100,7 @@ export class JobProcessor {
   }
   
   private async createReviewSyncJob(queueJobId: string, payload: TripAdvisorImportPayload): Promise<string> {
-    const syncJobId = randomUUID();
+    const syncJobId = crypto.randomUUID();
     
     // Extract business info from URL
     const businessMatch = payload.url.match(/\/([^\/]+)\.html$/);
