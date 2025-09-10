@@ -8,7 +8,6 @@ const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const supabase_js_1 = require("@supabase/supabase-js");
 const WorkerManager_1 = require("./services/WorkerManager");
-const HealthServer_1 = require("./services/HealthServer");
 const JobAPI_1 = require("./api/JobAPI");
 const EnhancedJobAPI_1 = require("./api/EnhancedJobAPI");
 const Logger_1 = require("./utils/Logger");
@@ -24,10 +23,7 @@ async function main() {
         // Initialize Supabase client
         const config = Config_1.Config.getInstance();
         const supabase = (0, supabase_js_1.createClient)(config.supabaseUrl, config.supabaseServiceKey);
-        // Start health server
-        const healthServer = new HealthServer_1.HealthServer();
-        await healthServer.start();
-        // Start API server
+        // Start API server (single server for everything)
         const app = (0, express_1.default)();
         const jobAPI = new JobAPI_1.JobAPI(supabase);
         const enhancedJobAPI = new EnhancedJobAPI_1.EnhancedJobAPI(supabase);
@@ -168,7 +164,6 @@ async function main() {
             logger.info(`📴 Received ${signal}, starting graceful shutdown...`);
             try {
                 await workerManager.stop();
-                await healthServer.stop();
                 logger.info('✅ Graceful shutdown completed');
                 process.exit(0);
             }
@@ -199,4 +194,5 @@ process.on('uncaughtException', (error) => {
     process.exit(1);
 });
 main();
+// Force deployment Wed Sep 10 15:38:21 EDT 2025
 //# sourceMappingURL=index.js.map

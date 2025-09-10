@@ -3,7 +3,6 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
 import { WorkerManager } from './services/WorkerManager';
-import { HealthServer } from './services/HealthServer';
 import { JobAPI } from './api/JobAPI';
 import { EnhancedJobAPI } from './api/EnhancedJobAPI';
 import { Logger } from './utils/Logger';
@@ -25,11 +24,7 @@ async function main() {
     const config = Config.getInstance();
     const supabase = createClient(config.supabaseUrl, config.supabaseServiceKey);
     
-    // Start health server
-    const healthServer = new HealthServer();
-    await healthServer.start();
-    
-    // Start API server
+    // Start API server (single server for everything)
     const app = express();
     const jobAPI = new JobAPI(supabase);
     const enhancedJobAPI = new EnhancedJobAPI(supabase);
@@ -189,7 +184,6 @@ async function main() {
       
       try {
         await workerManager.stop();
-        await healthServer.stop();
         logger.info('✅ Graceful shutdown completed');
         process.exit(0);
       } catch (error) {
