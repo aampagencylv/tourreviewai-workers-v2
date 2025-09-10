@@ -28,8 +28,8 @@ class JobProcessor {
         try {
             // Validate payload
             this.validateTripAdvisorPayload(payload);
-            // Create review sync job record
-            const syncJobId = await this.createReviewSyncJob(jobId, payload);
+            // Create review sync job record and get last review date for incremental sync
+            const { syncJobId, lastReviewDate } = await this.createReviewSyncJob(jobId, payload);
             // Extract URL path for DataForSEO
             const urlPath = this.extractTripAdvisorPath(payload.url);
             // Update progress
@@ -41,9 +41,9 @@ class JobProcessor {
             await this.updateProgress(syncJobId, 30, 'waiting_for_results');
             // Poll for results
             const reviewsData = await this.pollForResults(syncJobId, taskId);
-            // Process and import reviews
+            // Process and import reviews with incremental sync
             await this.updateProgress(syncJobId, 60, 'importing_reviews');
-            const importedCount = await this.importReviews(syncJobId, reviewsData);
+            const importedCount = await this.importReviews(syncJobId, reviewsData, lastReviewDate);
             // Mark as completed
             await this.completeJob(syncJobId, importedCount, reviewsData.items?.length || 0);
             this.logger.info(`✅ TripAdvisor import completed: ${importedCount} reviews imported`);
@@ -76,6 +76,25 @@ class JobProcessor {
         const businessName = payload.business_name ||
             businessId.replace(/-/g, ' ').replace(/^.*Reviews /, '') ||
             'TripAdvisor Business';
+        // Check for incremental sync - find the most recent review for this business
+        let lastReviewDate = null;
+        if (!payload.full_history) {
+            const { data: lastReview } = await this.supabase
+                .from('tripadvisor_reviews')
+                .select('review_date')
+                .eq('platform', 'tripadvisor')
+                .ilike('source_url', `%${businessId}%`)
+                .order('review_date', { ascending: false })
+                .limit(1)
+                .single();
+            if (lastReview?.review_date) {
+                lastReviewDate = lastReview.review_date;
+                this.logger.info(`🔄 Incremental sync: Last review date found: ${lastReviewDate}`);
+            }
+            else {
+                this.logger.info(`🆕 First-time import: No existing reviews found for this business`);
+            }
+        }
         const { error } = await this.supabase
             .from('review_sync_jobs')
             .insert({
@@ -100,7 +119,7 @@ class JobProcessor {
             throw new Error(`Failed to create review sync job: ${error.message}`);
         }
         this.logger.info(`📝 Created review sync job: ${syncJobId}`);
-        return syncJobId;
+        return { syncJobId, lastReviewDate };
     }
     extractTripAdvisorPath(url) {
         const match = url.match(/tripadvisor\.com\/(.+)$/);
@@ -165,15 +184,32 @@ class JobProcessor {
         }
         throw new Error(`DataForSEO task timed out after ${maxAttempts} attempts`);
     }
-    async importReviews(syncJobId, reviewsData) {
+    async importReviews(syncJobId, reviewsData, lastReviewDate) {
         const totalAvailable = reviewsData.reviews_count || 0;
         const firstBatch = reviewsData.items || [];
         this.logger.info(`📊 Total reviews available: ${totalAvailable}, First batch: ${firstBatch.length}`);
+        if (lastReviewDate) {
+            this.logger.info(`🔄 Incremental sync: Only importing reviews newer than ${lastReviewDate}`);
+        }
         // Update total available count from API response
         await this.updateSyncJob(syncJobId, { total_available: totalAvailable });
+        // Filter first batch for incremental sync
+        let filteredFirstBatch = firstBatch;
+        if (lastReviewDate) {
+            filteredFirstBatch = firstBatch.filter(review => {
+                const reviewDate = review.timestamp || review.date_of_visit;
+                return reviewDate && new Date(reviewDate) > new Date(lastReviewDate);
+            });
+            this.logger.info(`📋 Filtered first batch: ${filteredFirstBatch.length}/${firstBatch.length} are new reviews`);
+        }
         // Collect all reviews through pagination
-        let allReviews = [...firstBatch];
+        let allReviews = [...filteredFirstBatch];
         let currentOffset = firstBatch.length;
+        // For incremental sync, if first batch has no new reviews, we might be done
+        if (lastReviewDate && filteredFirstBatch.length === 0 && firstBatch.length > 0) {
+            this.logger.info(`✅ Incremental sync complete: No new reviews found in first batch`);
+            return 0;
+        }
         // Continue fetching if there are more reviews available
         while (currentOffset < totalAvailable) { // No artificial cap - collect ALL available reviews
             this.logger.info(`📄 Fetching more reviews: ${currentOffset}/${totalAvailable}`);
