@@ -214,9 +214,9 @@ export class JobAPI {
         return;
       }
 
-      // Get reviews
+      // Get reviews from the new table
       const { data: reviews, error: reviewsError } = await this.supabase
-        .from('reviews')
+        .from('tripadvisor_reviews')
         .select('*')
         .eq('job_id', syncJob.id)
         .order('review_date', { ascending: false })
