@@ -199,4 +199,5 @@ process.on('uncaughtException', (error) => {
 });
 main();
 // Force deployment Wed Sep 10 15:56:58 EDT 2025
+// Force Railway deployment Wed Sep 10 16:52:48 EDT 2025
 //# sourceMappingURL=index.js.map
