@@ -177,18 +177,26 @@ class JobProcessor {
         const batchSize = this.config.batchSize;
         for (let i = 0; i < reviews.length; i += batchSize) {
             const batch = reviews.slice(i, i + batchSize);
-            // Simplified review records to bypass validation issues
+            // Complete review records for the new clean table
             const reviewRecords = batch.map(review => ({
+                job_id: syncJobId,
                 platform: 'tripadvisor',
                 external_id: review.review_id || `tripadvisor_${Date.now()}_${Math.random()}`,
                 author_name: review.user_profile?.name || 'Anonymous',
+                author_location: review.user_profile?.location || null,
                 rating: review.rating?.value || 5,
+                review_title: review.title || null,
                 review_text: review.review_text || 'No review text available',
+                review_date: review.timestamp || new Date().toISOString(),
+                source_url: review.url || null,
+                language: review.language || 'en',
+                is_verified: review.is_verified || false,
+                helpful_votes: review.helpful_votes || 0,
                 raw_data: review
             }));
             try {
                 const { error, count } = await this.supabase
-                    .from('reviews')
+                    .from('tripadvisor_reviews')
                     .upsert(reviewRecords, {
                     onConflict: 'platform,external_id',
                     count: 'exact'
