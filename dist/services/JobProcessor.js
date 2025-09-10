@@ -114,7 +114,7 @@ class JobProcessor {
                 url_path: urlPath,
                 location_code: 1003854, // United States location code
                 priority: 2,
-                depth: fullHistory ? 500 : 150, // Increased limits: 150 default, 500 for full history
+                depth: fullHistory ? 1000 : 500, // Higher limits to support businesses with many reviews
                 offset: offset // Add offset for pagination
             }];
         this.logger.info('📡 Creating DataForSEO task:', payload);
@@ -175,7 +175,7 @@ class JobProcessor {
         let allReviews = [...firstBatch];
         let currentOffset = firstBatch.length;
         // Continue fetching if there are more reviews available
-        while (currentOffset < totalAvailable && currentOffset < 500) { // Cap at 500 for safety
+        while (currentOffset < totalAvailable) { // No artificial cap - collect ALL available reviews
             this.logger.info(`📄 Fetching more reviews: ${currentOffset}/${totalAvailable}`);
             try {
                 // Create additional DataForSEO task for next batch
