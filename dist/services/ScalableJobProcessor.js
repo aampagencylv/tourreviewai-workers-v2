@@ -197,27 +197,29 @@ class ScalableJobProcessor {
                 .limit(1);
             lastReviewDate = data?.[0]?.posted_at || null;
         }
-        const { error } = await this.supabase
+        const { data, error } = await this.supabase
             .from('review_sync_jobs')
             .insert({
-            id: syncJobId,
-            user_id: payload.user_id,
+            tour_operator_id: payload.user_id,
             platform: 'tripadvisor',
-            business_url: payload.url,
-            business_name: payload.business_name || 'TripAdvisor Business',
-            full_history: payload.full_history,
-            status: 'running',
-            progress_percentage: 5,
-            processing_stage: `${phase}_initializing`,
-            started_at: new Date().toISOString(),
+            source_business_name: payload.business_name || 'Unknown Business',
+            source_url: payload.url,
+            full_history: payload.full_history || false,
+            status: 'processing',
+            processing_stage: phase,
+            progress_percentage: 0,
             total_available: 0,
             imported_count: 0,
             skipped_count: 0,
-            error_count: 0
-        });
+            error_count: 0,
+            started_at: new Date().toISOString()
+        })
+            .select('id')
+            .single();
         if (error) {
             throw new Error(`Failed to create review sync job: ${error.message}`);
         }
+        const syncJobId = data.id;
         this.logger.info(`📝 Created ${phase} sync job: ${syncJobId}`);
         return { syncJobId, lastReviewDate: lastReviewDate || '' };
     }

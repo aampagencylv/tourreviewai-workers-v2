@@ -126,7 +126,7 @@ class JobProcessor {
                 // Continue with full import if incremental check fails
             }
         }
-        const { error } = await this.supabase
+        const { data, error } = await this.supabase
             .from('review_sync_jobs')
             .insert({
             id: syncJobId,
@@ -137,15 +137,16 @@ class JobProcessor {
             source_business_name: businessName,
             source_url: payload.url,
             full_history: payload.full_history,
-            status: 'running',
-            progress_percentage: 5,
-            processing_stage: 'initializing',
-            started_at: new Date().toISOString(),
-            total_available: 0, // Initialize with 0, will be updated when we get results
+            status: 'processing',
+            progress_percentage: 0,
+            total_available: 0,
             imported_count: 0,
             skipped_count: 0,
-            error_count: 0
-        });
+            error_count: 0,
+            started_at: new Date().toISOString()
+        })
+            .select()
+            .single();
         if (error) {
             throw new Error(`Failed to create review sync job: ${error.message}`);
         }
