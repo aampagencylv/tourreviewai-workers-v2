@@ -80,7 +80,11 @@ class JobProcessor {
             status: 'running',
             progress_percentage: 5,
             processing_stage: 'initializing',
-            started_at: new Date().toISOString()
+            started_at: new Date().toISOString(),
+            total_available: 0, // Initialize with 0, will be updated when we get results
+            imported_count: 0,
+            skipped_count: 0,
+            error_count: 0
         });
         if (error) {
             throw new Error(`Failed to create review sync job: ${error.message}`);
