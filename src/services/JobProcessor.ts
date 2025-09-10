@@ -8,6 +8,15 @@ import { RetryManager } from '../utils/RetryManager';
 // Use require for crypto to ensure compatibility
 const crypto = require('crypto');
 
+// Simple UUID generation function as fallback
+function generateUUID(): string {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 interface TripAdvisorImportPayload {
   user_id: string;
   url: string;
@@ -100,7 +109,7 @@ export class JobProcessor {
   }
   
   private async createReviewSyncJob(queueJobId: string, payload: TripAdvisorImportPayload): Promise<string> {
-    const syncJobId = crypto.randomUUID();
+    const syncJobId = generateUUID();
     
     // Extract business info from URL
     const businessMatch = payload.url.match(/\/([^\/]+)\.html$/);
@@ -238,7 +247,7 @@ export class JobProcessor {
       const batch = reviews.slice(i, i + batchSize);
       
       const reviewRecords = batch.map(review => ({
-        id: crypto.randomUUID(),
+        id: generateUUID(),
         job_id: syncJobId,
         platform: 'tripadvisor',
         external_id: review.review_id || `tripadvisor_${Date.now()}_${Math.random()}`,

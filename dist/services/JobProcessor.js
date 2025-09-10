@@ -7,6 +7,14 @@ const DataForSEOClient_1 = require("../clients/DataForSEOClient");
 const RetryManager_1 = require("../utils/RetryManager");
 // Use require for crypto to ensure compatibility
 const crypto = require('crypto');
+// Simple UUID generation function as fallback
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
 class JobProcessor {
     constructor(supabase) {
         this.supabase = supabase;
@@ -61,7 +69,7 @@ class JobProcessor {
         }
     }
     async createReviewSyncJob(queueJobId, payload) {
-        const syncJobId = crypto.randomUUID();
+        const syncJobId = generateUUID();
         // Extract business info from URL
         const businessMatch = payload.url.match(/\/([^\/]+)\.html$/);
         const businessId = businessMatch ? businessMatch[1] : 'unknown';
@@ -170,7 +178,7 @@ class JobProcessor {
         for (let i = 0; i < reviews.length; i += batchSize) {
             const batch = reviews.slice(i, i + batchSize);
             const reviewRecords = batch.map(review => ({
-                id: crypto.randomUUID(),
+                id: generateUUID(),
                 job_id: syncJobId,
                 platform: 'tripadvisor',
                 external_id: review.review_id || `tripadvisor_${Date.now()}_${Math.random()}`,
