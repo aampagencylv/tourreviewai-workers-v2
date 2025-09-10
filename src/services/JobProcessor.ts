@@ -155,12 +155,13 @@ export class JobProcessor {
     return match[1];
   }
   
-  private async createDataForSEOTask(urlPath: string, fullHistory: boolean): Promise<string> {
+  private async createDataForSEOTask(urlPath: string, fullHistory: boolean, offset: number = 0): Promise<string> {
     const payload = [{
       url_path: urlPath,
       location_code: 1003854, // United States location code
       priority: 2,
-      depth: fullHistory ? 500 : 150  // Increased limits: 150 default, 500 for full history
+      depth: fullHistory ? 500 : 150,  // Increased limits: 150 default, 500 for full history
+      offset: offset  // Add offset for pagination
     }];
     
     this.logger.info('📡 Creating DataForSEO task:', payload);
@@ -228,13 +229,43 @@ export class JobProcessor {
   }
   
   private async importReviews(syncJobId: string, reviewsData: any): Promise<number> {
-    const reviews: ReviewData[] = reviewsData.items || [];
-    const totalReviews = reviews.length;
+    const totalAvailable = reviewsData.reviews_count || 0;
+    const firstBatch: ReviewData[] = reviewsData.items || [];
     
-    this.logger.info(`📝 Importing ${totalReviews} reviews for sync job: ${syncJobId}`);
+    this.logger.info(`📊 Total reviews available: ${totalAvailable}, First batch: ${firstBatch.length}`);
     
-    // Update total available count
-    await this.updateSyncJob(syncJobId, { total_available: totalReviews });
+    // Update total available count from API response
+    await this.updateSyncJob(syncJobId, { total_available: totalAvailable });
+    
+    // Collect all reviews through pagination
+    let allReviews: ReviewData[] = [...firstBatch];
+    let currentOffset = firstBatch.length;
+    
+    // Continue fetching if there are more reviews available
+    while (currentOffset < totalAvailable && currentOffset < 500) { // Cap at 500 for safety
+      this.logger.info(`📄 Fetching more reviews: ${currentOffset}/${totalAvailable}`);
+      
+      try {
+        // Create additional DataForSEO task for next batch
+        const urlPath = this.extractTripAdvisorPath(reviewsData.check_url || '');
+        const nextTaskId = await this.createDataForSEOTask(urlPath, true, currentOffset);
+        const nextBatch = await this.pollForResults(syncJobId, nextTaskId);
+        
+        if (nextBatch && nextBatch.items && nextBatch.items.length > 0) {
+          allReviews.push(...nextBatch.items);
+          currentOffset += nextBatch.items.length;
+          this.logger.info(`✅ Collected ${nextBatch.items.length} more reviews (Total: ${allReviews.length})`);
+        } else {
+          this.logger.info(`🔚 No more reviews available at offset ${currentOffset}`);
+          break;
+        }
+      } catch (error) {
+        this.logger.error(`❌ Error fetching reviews at offset ${currentOffset}:`, error);
+        break; // Continue with what we have
+      }
+    }
+    
+    this.logger.info(`📝 Importing ${allReviews.length} total reviews for sync job: ${syncJobId}`);
     
     let imported = 0;
     let skipped = 0;
@@ -243,8 +274,8 @@ export class JobProcessor {
     // Process in batches for better performance and memory management
     const batchSize = this.config.batchSize;
     
-    for (let i = 0; i < reviews.length; i += batchSize) {
-      const batch = reviews.slice(i, i + batchSize);
+    for (let i = 0; i < allReviews.length; i += batchSize) {
+      const batch = allReviews.slice(i, i + batchSize);
       
       // Complete review records for the new clean table
       const reviewRecords = batch.map(review => ({
@@ -286,7 +317,7 @@ export class JobProcessor {
       }
       
       // Update progress
-      const progress = 60 + Math.round(((i + batch.length) / totalReviews) * 35);
+      const progress = 60 + Math.round(((i + batch.length) / allReviews.length) * 35);
       await this.updateProgress(syncJobId, progress, 'importing_reviews');
       await this.updateSyncJob(syncJobId, { 
         imported_count: imported,
@@ -294,7 +325,7 @@ export class JobProcessor {
         error_count: errors
       });
       
-      this.logger.debug(`📊 Progress: ${imported}/${totalReviews} imported, ${skipped} skipped, ${errors} errors`);
+      this.logger.debug(`📊 Progress: ${imported}/${allReviews.length} imported, ${skipped} skipped, ${errors} errors`);
     }
     
     this.logger.info(`📊 Import completed: ${imported} imported, ${skipped} skipped, ${errors} errors`);
