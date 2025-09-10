@@ -103,6 +103,7 @@ class JobProcessor {
     async createDataForSEOTask(urlPath, fullHistory) {
         const payload = [{
                 url_path: urlPath,
+                location_code: 1003854, // United States location code
                 priority: 2,
                 depth: fullHistory ? 100 : 20
             }];

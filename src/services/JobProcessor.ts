@@ -147,6 +147,7 @@ export class JobProcessor {
   private async createDataForSEOTask(urlPath: string, fullHistory: boolean): Promise<string> {
     const payload = [{
       url_path: urlPath,
+      location_code: 1003854, // United States location code
       priority: 2,
       depth: fullHistory ? 100 : 20
     }];
