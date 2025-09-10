@@ -1,5 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import axios from 'axios';
+import crypto from 'crypto';
 import { Config } from '../config/Config';
 import { Logger } from '../utils/Logger';
 import { DataForSEOClient } from '../clients/DataForSEOClient';

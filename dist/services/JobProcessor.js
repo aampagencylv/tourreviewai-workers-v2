@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JobProcessor = void 0;
+const crypto_1 = __importDefault(require("crypto"));
 const Config_1 = require("../config/Config");
 const Logger_1 = require("../utils/Logger");
 const DataForSEOClient_1 = require("../clients/DataForSEOClient");
@@ -59,7 +63,7 @@ class JobProcessor {
         }
     }
     async createReviewSyncJob(queueJobId, payload) {
-        const syncJobId = crypto.randomUUID();
+        const syncJobId = crypto_1.default.randomUUID();
         // Extract business info from URL
         const businessMatch = payload.url.match(/\/([^\/]+)\.html$/);
         const businessId = businessMatch ? businessMatch[1] : 'unknown';
@@ -167,7 +171,7 @@ class JobProcessor {
         for (let i = 0; i < reviews.length; i += batchSize) {
             const batch = reviews.slice(i, i + batchSize);
             const reviewRecords = batch.map(review => ({
-                id: crypto.randomUUID(),
+                id: crypto_1.default.randomUUID(),
                 job_id: syncJobId,
                 platform: 'tripadvisor',
                 external_id: review.review_id || `tripadvisor_${Date.now()}_${Math.random()}`,
