@@ -1,0 +1,341 @@
+[2025-09-09 23:04:58] [32minfo[39m: 🚀 Starting TourReviewAI Worker Service
+(node:27242) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[2025-09-09 23:04:58] [32minfo[39m: 🏥 Health server started on port 8081
+[2025-09-09 23:04:58] [32minfo[39m: 🔄 Starting Worker Manager
+[2025-09-09 23:04:58] [32minfo[39m: 📝 Worker registered: worker-dev-1
+[2025-09-09 23:04:58] [32minfo[39m: ✅ Worker Manager started (ID: worker-dev-1)
+[2025-09-09 23:04:58] [32minfo[39m: ✅ Worker service started successfully
+[2025-09-09 23:05:03] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:05:08] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:05:13] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:05:18] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:05:23] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:05:28] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:05:33] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:05:38] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:05:43] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:05:48] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:05:53] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:05:58] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:03] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:08] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:13] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:18] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:23] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:28] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:33] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:38] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:43] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:48] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:53] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:06:58] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:03] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:08] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:13] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:18] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:24] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:28] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:33] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:38] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:43] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:48] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:53] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:07:58] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:03] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:08] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:13] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:18] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:23] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:28] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:33] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:38] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:43] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:48] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:53] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:08:58] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:03] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:08] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:13] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:18] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:23] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:28] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:33] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:38] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:43] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:48] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:53] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:09:58] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:10:03] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:10:08] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:10:13] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:10:18] [31merror[39m: ❌ Failed to claim job: {
+  "error": "Failed to claim job: column reference \"job_type\" is ambiguous",
+  "stack": "Error: Failed to claim job: column reference \"job_type\" is ambiguous\n    at WorkerManager.claimNextJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:166:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async WorkerManager.pollForJobs (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:148:25)\n    at async Timeout._onTimeout (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:134:21)",
+  "name": "Error"
+}
+[2025-09-09 23:10:23] [32minfo[39m: 🎯 Claimed job: 9f077959-e53d-4624-acb4-a4f1c4f536b4 (tripadvisor_import)
+[2025-09-09 23:10:23] [32minfo[39m: 🚀 Started processing job: 9f077959-e53d-4624-acb4-a4f1c4f536b4 (1/3)
+[2025-09-09 23:10:23] [32minfo[39m: 🎯 Processing TripAdvisor import job: 9f077959-e53d-4624-acb4-a4f1c4f536b4
+[2025-09-09 23:10:23] [31merror[39m: ❌ TripAdvisor import failed for job 9f077959-e53d-4624-acb4-a4f1c4f536b4: {
+  "error": "user_id is required",
+  "stack": "Error: user_id is required\n    at JobProcessor.validateTripAdvisorPayload (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/JobProcessor.js:49:19)\n    at JobProcessor.processTripAdvisorImport (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/JobProcessor.js:20:18)\n    at WorkerManager.executeJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:205:45)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",
+  "name": "Error"
+}
+[2025-09-09 23:10:24] [31merror[39m: ❌ Job 9f077959-e53d-4624-acb4-a4f1c4f536b4 failed: {
+  "error": "user_id is required",
+  "stack": "Error: user_id is required\n    at JobProcessor.validateTripAdvisorPayload (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/JobProcessor.js:49:19)\n    at JobProcessor.processTripAdvisorImport (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/JobProcessor.js:20:18)\n    at WorkerManager.executeJob (/home/ubuntu/tourreviewai/scalable-architecture/workers/dist/services/WorkerManager.js:205:45)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",
+  "name": "Error"
+}

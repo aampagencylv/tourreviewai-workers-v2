@@ -1,0 +1,16 @@
+[build]
+builder = "nixpacks"
+buildCommand = "npm run build"
+
+[deploy]
+startCommand = "node dist/index.js"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+
+[env]
+NODE_ENV = "production"
+PORT = "8080"
+HEALTH_PORT = "8080"
+
