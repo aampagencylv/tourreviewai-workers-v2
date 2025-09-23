@@ -357,7 +357,7 @@ export class JobProcessor {
       
       try {
         const { error, count } = await this.supabase
-          .from('external_reviews')
+          .from('tripadvisor_reviews')
           .upsert(reviewRecords, { 
             onConflict: 'source,external_id',
             count: 'exact'
